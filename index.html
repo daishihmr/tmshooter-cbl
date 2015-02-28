@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+    <canvas id="app" width="500" height="500"></canvas>
+    <div><span id="signinButton"></span></div>
+
+    <script src="tmlib.js"></script>
+    <script src="listview.js"></script>
+    <script src="signinbutton.js"></script>
+    <script src="leaderboardscene.js"></script>
+    <script src="gpgsconstants.js"></script>
+
+    <script>
+
+    var signinButton;
+
+    tm.main(function() {
+
+        tm.display.Label.default.fontFamily = 'Lato';
+
+
+        signinButton = tm.google.SigninButton("#signinButton", {
+            clientid: gpgsConstants.CLIENT_ID
+        });
+
+        app = tm.display.CanvasApp("#app")
+        app.resize(480, 640).fitWindow();
+        app.replaceScene(MainScene());
+        app.run();
+
+    });
+
+    tm.define("MainScene", {
+        superClass: "tm.app.Scene",
+
+        init: function() {
+            var self = this;
+            this.superInit();
+
+            this.fromJSON({
+                children: {
+                    button: {
+                        type: "tm.ui.FlatButton",
+                        init: {
+                            text: "open",
+                        },
+                        x: app.width * 0.5,
+                        y: app.height * 0.5,
+                    },
+                },
+            });
+
+            self.button.on("push", function() {
+                if (signinButton.isSignedIn()) {
+                    self.app.pushScene(tm.google.LeaderboardScene({
+                        applicationId: "257317887375",
+                        width: app.width,
+                        height: app.height,
+                    }));
+                }
+            });
+        },
+    });
+    </script>
+
+</body>
+
+</html>
