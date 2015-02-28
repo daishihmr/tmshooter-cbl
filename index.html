@@ -1,75 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-    <meta charset="UTF-8">
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<meta charset=UTF-8>
+<meta name="author" content="daishi.hmr@gmail.com">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+@font-face {
+    font-family: Orbitron;
+    src: url(font/Orbitron-Regular.ttf) format("truetype");
+}
+@font-face {
+    font-family: 'Ubuntu Mono';
+    src: url(font/UbuntuMono-Bold.ttf) format("truetype");
+}
+</style>
 </head>
-
-<body>
-
-    <canvas id="app" width="500" height="500"></canvas>
-    <div><span id="signinButton"></span></div>
-
-    <script src="tmlib.js"></script>
-    <script src="listview.js"></script>
-    <script src="signinbutton.js"></script>
-    <script src="leaderboardscene.js"></script>
-    <script src="gpgsconstants.js"></script>
-
-    <script>
-
-    var signinButton;
-
-    tm.main(function() {
-
-        tm.display.Label.default.fontFamily = 'Lato';
-
-
-        signinButton = tm.google.SigninButton("#signinButton", {
-            clientid: gpgsConstants.CLIENT_ID
-        });
-
-        app = tm.display.CanvasApp("#app")
-        app.resize(480, 640).fitWindow();
-        app.replaceScene(MainScene());
-        app.run();
-
-    });
-
-    tm.define("MainScene", {
-        superClass: "tm.app.Scene",
-
-        init: function() {
-            var self = this;
-            this.superInit();
-
-            this.fromJSON({
-                children: {
-                    button: {
-                        type: "tm.ui.FlatButton",
-                        init: {
-                            text: "open",
-                        },
-                        x: app.width * 0.5,
-                        y: app.height * 0.5,
-                    },
-                },
-            });
-
-            self.button.on("push", function() {
-                if (signinButton.isSignedIn()) {
-                    self.app.pushScene(tm.google.LeaderboardScene({
-                        applicationId: "257317887375",
-                        width: app.width,
-                        height: app.height,
-                    }));
-                }
-            });
-        },
-    });
-    </script>
-
+<body style="background:#000011">
+<div id="signinButton"></div>
+<canvas id="background"></canvas>
+<canvas id="canvas2d"></canvas>
+<canvas id="scoreLabel"></canvas>
+<script src="libs/tmlib.js"></script>
+<script src="libs/mt.js"></script>
+<script src="libs/gamepad.js"></script>
+<script src="libs/signinbutton.js"></script>
+<script src="libs/gpgsconstants.js"></script>
+<script src="extern/extern.js"></script>
+<script src="extern/tween.js"></script>
+<script src="extern/keyboard.js"></script>
+<script src="extern/gls2.js"></script>
+<script src="target/gls2.js"></script>
+<script src="extern/google.js"></script>
 </body>
-
 </html>
