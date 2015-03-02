@@ -129,10 +129,6 @@ var model = new Ractive({
     },
 });
 
-var start = function() {
-    model.load();
-};
-
 var onChangeMode = function(mode) {
     model.set("mode", mode);
     model.load();
@@ -163,3 +159,7 @@ var processApiTask = function() {
 var task = {}
 task.callback = function() {};
 task.execute = function() {};
+
+window.onload = function() {
+    Games = window.opener.gapi.client.games;
+};

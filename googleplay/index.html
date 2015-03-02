@@ -36,47 +36,9 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
-        <span id="signinButton" style="display:none">
-          <span
-            class="g-signin"
-            data-callback="signinCallback"
-            data-clientid="257317887375-gum967gcq9b8r9a2bhcbcg6go2gbici5.apps.googleusercontent.com"
-            data-cookiepolicy="single_host_origin"
-            data-requestvisibleactions="http://schemas.google.com/AddActivity"
-            data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/games"
-            data-width="wide"
-            data-height="short"
-            data-theme="light">
-          </span>
-        </span>
-
-        <div id="list"></div>
-
-    </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./js/bootstrap.js"></script>
     <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
-    <script type="text/javascript">
-        var signinCallback = function(auth) {
-            if (!auth.error) {
-                $("#signinButton").hide();
-                gapi.client.load("games", "v1", function() {
-                    Games = gapi.client.games;
-                    start();
-                });
-            } else {
-                $("#signinButton").show();
-            }
-        };
-
-        (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/client:plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-        })();
-    </script>
 
     <script id="template" type="text/reactive">
         {{#if mode === 0}}
