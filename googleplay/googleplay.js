@@ -27,6 +27,8 @@ var model = new Ractive({
                         var item = res.items[i];
                         Data.leaderboards.push(item);
                     }
+                } else if (res.error) {
+                    console.error(res.error);
                 }
             });
             break;
@@ -44,6 +46,8 @@ var model = new Ractive({
                         var item = res.items[i];
                         Data.scores.push(item);
                     }
+                } else if (res.error) {
+                    console.error(res.error);
                 }
             });
             break;
@@ -97,9 +101,13 @@ var model = new Ractive({
                             for (var id in map) if (map.hasOwnProperty(id)) {
                                 Data.achievements.push(map[id]);
                             }
+                        } else if (res.error) {
+                            console.error(res.error);
                         }
                     });
 
+                } else if (res.error) {
+                    console.error(res.error);
                 }
             });
 
