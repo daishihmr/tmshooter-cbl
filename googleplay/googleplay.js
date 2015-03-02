@@ -170,4 +170,5 @@ task.execute = function() {};
 
 window.onload = function() {
     Games = window.opener.gapi.client.games;
+    model.load();
 };
