@@ -15,6 +15,10 @@ var model = new Ractive({
     template: "#template",
     data: Data,
     load: function() {
+        Data.leaderboards.splice(0, Data.leaderboards.length);
+        Data.scores.splice(0, Data.leaderboards.length);
+        Data.achievements.splice(0, Data.leaderboards.length);
+
         switch (this.get("mode")) {
         case 0:
             var req = Games.leaderboards.list({
